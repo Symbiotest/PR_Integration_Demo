@@ -1,5 +1,7 @@
 blocking: 
   severity_threshold: high
+  vulnerabilities: 
+    - SYM_PY_0136
 
 ignored: 
   vulnerabilities : 
