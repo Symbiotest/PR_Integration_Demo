@@ -6,13 +6,14 @@ on:
       - '*'
   
 jobs: 
-  security-scan:
-      runs-on: ubuntu-latest
-  
-      steps:
-        - uses: actions/checkout@v4
-  
-        - name: Scan
-          uses: SymbioticSec/actions/scan@v0.1.4
-          with:
-            api-token: ${{ secrets.SYMBIOTIC_ORGA_TOKEN }}
+  code-security-scan:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Scan
+        uses: SymbioticSec/actions/scan@v0.4.2
+        with:
+          api-token: ${{ secrets.SYMBIOTIC_API_TOKEN }}
+          diff-scan: true
