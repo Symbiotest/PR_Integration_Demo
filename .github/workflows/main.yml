@@ -3,9 +3,14 @@ name: Symbiotest
 on:
   push:
     branches:
-      - '*'
+      - main
+  pull_request:
+    types:
+      - opened
+      - synchronize
+      - reopened
   
-jobs: 
+jobs:
   code-security-scan:
     runs-on: ubuntu-latest
 
@@ -15,5 +20,6 @@ jobs:
       - name: Scan
         uses: SymbioticSec/actions/scan@v0.4.2
         with:
+          scan-type: code
           api-token: ${{ secrets.SYMBIOTIC_API_TOKEN }}
           diff-scan: true
