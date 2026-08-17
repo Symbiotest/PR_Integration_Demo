@@ -3,16 +3,22 @@ name: Symbiotest
 on:
   push:
     branches:
-      - '*'
+      - main
+  pull_request:
+    types:
+      - opened
+      - synchronize
+      - reopened
   
-jobs: 
-  security-scan:
-      runs-on: ubuntu-latest
-  
-      steps:
-        - uses: actions/checkout@v4
-  
-        - name: Scan
-          uses: SymbioticSec/actions/scan@v0.1.4
-          with:
-            api-token: ${{ secrets.SYMBIOTIC_ORGA_TOKEN }}
+jobs:
+  code-security-scan:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Scan
+        uses: SymbioticSec/actions/scan@v0.4.2
+        with:
+          api-token: ${{ secrets.SYMBIOTIC_API_TOKEN }}
+          diff-scan: true
